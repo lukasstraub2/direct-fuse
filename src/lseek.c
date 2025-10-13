@@ -57,6 +57,8 @@
  * lee@sandia.gov
  */
 
+#define _GNU_SOURCE
+
 #include <errno.h>
 #include <unistd.h>
 #include <assert.h>

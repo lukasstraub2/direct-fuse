@@ -91,10 +91,6 @@ PREPEND(__, SYSIO_INTERFACE_NAME(fxstat64))(int __ver,
 	SYSIO_INTERFACE_DISPLAY_BLOCK;
 
 	SYSIO_INTERFACE_ENTER;
-	if (__ver != _STAT_VER) {
-		err = -ENOSYS;
-		goto out;
-	}
 
 	err = 0;
 	fil = _sysio_fd_find(__fildes);
@@ -116,7 +112,7 @@ int
 SYSIO_INTERFACE_NAME(fstat64)(int fd, struct stat64 *buf)
 {
 
-	return PREPEND(__, SYSIO_INTERFACE_NAME(fxstat64))(_STAT_VER, fd, buf);
+	return PREPEND(__, SYSIO_INTERFACE_NAME(fxstat64))(0, fd, buf);
 }
 #endif
 
@@ -132,10 +128,6 @@ PREPEND(__, SYSIO_INTERFACE_NAME(xstat64))(int __ver,
 	SYSIO_INTERFACE_DISPLAY_BLOCK;
 
 	SYSIO_INTERFACE_ENTER;
-	if (__ver != _STAT_VER) {
-		err = -ENOSYS;
-		goto out;
-	}
 
 	INTENT_INIT(&intent, INT_GETATTR, NULL, NULL);
 	err = _sysio_namei(_sysio_cwd, __filename, 0, &intent, &pno);
@@ -158,7 +150,7 @@ int
 SYSIO_INTERFACE_NAME(stat64)(const char *filename, struct stat64 *buf)
 {
 
-	return PREPEND(__, SYSIO_INTERFACE_NAME(xstat64))(_STAT_VER,
+	return PREPEND(__, SYSIO_INTERFACE_NAME(xstat64))(0,
 							  filename,
 							  buf);
 }
@@ -176,10 +168,6 @@ PREPEND(__, SYSIO_INTERFACE_NAME(lxstat64))(int __ver,
 	SYSIO_INTERFACE_DISPLAY_BLOCK;
 
 	SYSIO_INTERFACE_ENTER;
-	if (__ver != _STAT_VER) {
-		err = -ENOSYS;
-		goto out;
-	}
 
 	INTENT_INIT(&intent, INT_GETATTR, NULL, NULL);
 	err = _sysio_namei(_sysio_cwd, __filename, ND_NOFOLLOW, &intent, &pno);
@@ -202,7 +190,7 @@ int
 SYSIO_INTERFACE_NAME(lstat64)(const char *filename, struct stat64 *buf)
 {
 
-	return PREPEND(__, SYSIO_INTERFACE_NAME(lxstat64))(_STAT_VER,
+	return PREPEND(__, SYSIO_INTERFACE_NAME(lxstat64))(0,
 							   filename,
 							   buf);
 }

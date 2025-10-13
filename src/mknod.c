@@ -110,10 +110,6 @@ PREPEND(__, SYSIO_INTERFACE_NAME(xmknod))(int __ver,
 	SYSIO_INTERFACE_DISPLAY_BLOCK;
 
 	SYSIO_INTERFACE_ENTER;
-	if (__ver != _MKNOD_VER) {
-		err = -ENOSYS;
-		goto out;
-	}
 
 	mode &= ~(_sysio_umask & 0777);			/* apply umask */
 
@@ -144,7 +140,7 @@ PREPEND(__, SYSIO_INTERFACE_NAME(mknod))(const char *path,
 					 dev_t dev)
 {
 
-	return PREPEND(__, SYSIO_INTERFACE_NAME(xmknod))(_MKNOD_VER, 
+	return PREPEND(__, SYSIO_INTERFACE_NAME(xmknod))(0, 
 							 path, 
 							 mode, 
 							 &dev);
