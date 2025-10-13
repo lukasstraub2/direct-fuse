@@ -58,7 +58,7 @@
 //#include <sys/time.h>
 //struct timeval t1, t2, t3, t4, t5, t6;
 #include <time.h>
-struct timespec t1, t2, t3, t4, t5, t6, t7, t8, t9, t10;
+//struct timespec t1, t2, t3, t4, t5, t6, t7, t8, t9, t10;
 /*
  * Open file support.
  */

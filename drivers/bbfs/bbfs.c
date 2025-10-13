@@ -797,7 +797,7 @@ int bb_fgetattr(const char *path, struct stat *statbuf, struct fuse_file_info *f
     return retstat;
 }
 
-extern struct fuse_operations bb_oper = {
+struct fuse_operations bb_oper = {
   .getattr = bb_getattr,
   .readlink = bb_readlink,
   // no .getdir -- that's deprecated

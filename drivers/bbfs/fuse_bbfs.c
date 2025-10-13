@@ -57,7 +57,7 @@
 #include "params.h"
 /* bbfs stat */
 struct bb_state *bb_data;
-struct fuse_operations bb_oper;
+extern struct fuse_operations bb_oper;
 
 
 static int _sysio_bbfs_fsswop_mount(const char *source,
