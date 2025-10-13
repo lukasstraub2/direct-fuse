@@ -9,25 +9,25 @@ SYSIO_SRC=$(SYSIO_HOME)/src
 SYSIO_DEV=$(SYSIO_HOME)/dev/stdfd
 SYSIO_BBFS=$(SYSIO_HOME)/drivers/bbfs
 SYSIO_SSHFS=$(SYSIO_HOME)/drivers/sshfs
-SYSIO_CRUISE=$(SYSIO_HOME)/drivers/cruise
+#SYSIO_CRUISE=$(SYSIO_HOME)/drivers/cruise
 SYSIO_FUSE=$(SYSIO_HOME)/drivers/fuse
 SYSIO_FTPFS=$(SYSIO_HOME)/drivers/curlftpfs
-SYSIO_GLFS=$(SYSIO_HOME)/drivers/glusterfs
+#SYSIO_GLFS=$(SYSIO_HOME)/drivers/glusterfs
 
-CRUISE_LIBS=-L$(CRUISE_HOME)/install/lib -lcruise-posix -pthread
-CRUISE_INCLUDES=-I$(CRUISE_HOME)/src \
-		-I$(CRUISE_HOME)
+#CRUISE_LIBS=-L$(CRUISE_HOME)/install/lib -lcruise-posix -pthread
+#CRUISE_INCLUDES=-I$(CRUISE_HOME)/src \
+#		-I$(CRUISE_HOME)
 
 FUSE_LIBS=-lglib-2.0  -L$(FUSE_HOME)/install/lib -lfuse -lgthread-2.0
 FUSE_INCLUDES=-I$(FUSE_HOME)/include \
 	-D_FILE_OFFSET_BITS=64 \
 	-DFUSE_USE_VERSION=26 \
-	-I/usr/include/glib-2.0 \
+	-I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include \
 	-I/usr/lib64/glib-2.0/include  
 
 FTPFS_LIBS=-lcurl
 
-GLFS_LIBS=-L$(GLFS_HOME)/test-build  -lxglfs -lgfapi -lrt
+#GLFS_LIBS=-L$(GLFS_HOME)/test-build  -lxglfs -lgfapi -lrt
 
 LIBS=$(FUSE_LIBS) $(CRUISE_LIBS) $(FTPFS_LIBS) $(GLFS_LIBS)
 
@@ -111,7 +111,7 @@ SSHFS_OBJS = \
 	$(SYSIO_SSHFS)/sshfs.o \
 	$(SYSIO_SSHFS)/cache.o \
 
-CRUISE_OBJS = $(SYSIO_CRUISE)/fuse_cruise.o
+#CRUISE_OBJS = $(SYSIO_CRUISE)/fuse_cruise.o
 
 FTPFS_OBJS = \
 	$(SYSIO_FTPFS)/fuse_ftpfs.o \
@@ -122,8 +122,8 @@ FTPFS_OBJS = \
 	$(SYSIO_FTPFS)/curlftpfs_cache.o
 
 
-GLFS_OBJS = \
-	$(SYSIO_GLFS)/fuse_glfs.o
+#GLFS_OBJS = \
+#	$(SYSIO_GLFS)/fuse_glfs.o
 
 OBJ = $(SYSIO_OBJS) $(SYSIO_FUSE_OBJS) $(BBFS_OBJS) $(SSHFS_OBJS) $(CRUISE_OBJS) $(FTPFS_OBJS) $(GLFS_OBJS)
 
