@@ -56,8 +56,7 @@ INCLUDES=-I$(SYSIO_HOME)/include  \
 
 CFLAGS=-fpic -g -O2 $(INCLUDES)
 
-all: libsysio.a 
-#all: libsysio.so
+all: libsysio.a libsysio.so
 
 SYSIO_OBJS=	\
 	$(SYSIO_SRC)/access.o \
@@ -133,7 +132,7 @@ OBJ = $(SYSIO_OBJS) $(SYSIO_FUSE_OBJS) $(BBFS_OBJS) $(SSHFS_OBJS) $(CRUISE_OBJS)
 libsysio.a: $(OBJ) 
 	ar rcs $@ $^
 
-libsysio.so: $(OBJS) $(SYSIO_FUSE_OBJS) $(BBFS_OBJS) $(SSHFS_OBJS) $(CRUISE_OBJS) $(GLFS_OBJS)
+libsysio.so: $(OBJ) $(SYSIO_FUSE_OBJS) $(BBFS_OBJS) $(SSHFS_OBJS) $(CRUISE_OBJS) $(GLFS_OBJS)
 	$(CC) -shared $^ -o $@
 clean:
 	rm $(SYSIO_SRC)/*.o
