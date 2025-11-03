@@ -309,7 +309,7 @@ int bb_open(const char *path, struct fuse_file_info *fi)
     // if the open call succeeds, my retstat is the file descriptor,
     // else it's -errno.  I'm making sure that in that case the saved
     // file descriptor is exactly -1.
-    fd = open(fpath, fi->flags);
+    fd = open(fpath, fi->flags, 0600);
 	  //printf("bbopen Open:%s, fd:%d, errno: %d\n", fpath, fd, errno);
     
     fi->fh = fd;

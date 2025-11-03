@@ -92,7 +92,7 @@ int main(int argc, char * const argv[])
 
 	read_data = malloc(sizeof(char) * size);
 	memset(read_data, 0, size);
-	err = SYSIO_INTERFACE_NAME(mount)("/data/yzhu/bbfs", "/b_fuse/", "bbfs", 2, NULL);
+	err = SYSIO_INTERFACE_NAME(mount)("/tmp", "/b_fuse/", "bbfs", 2, NULL);
 	if (err) {
 		fprintf(stderr, "mount bbfs failed\n");
 		return 0;

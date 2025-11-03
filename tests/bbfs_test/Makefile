@@ -1,11 +1,11 @@
-CC=mpicc
+CC=gcc
 SYSIO_HOME=../..
 CRUISE_HOME=../../../cruise
 FUSE_HOME=/data/yzhu/fuse-2.9.7
 GLFS_HOME=../../../xglfs
 
-GLFS_LIBS=-L$(GLFS_HOME)/test-build -lxglfs -lgfapi -lrt
-CRUISE_LIBS=-L$(CRUISE_HOME)/install/lib -lcruise-posix -pthread
+#GLFS_LIBS=-L$(GLFS_HOME)/test-build -lxglfs -lgfapi -lrt
+#CRUISE_LIBS=-L$(CRUISE_HOME)/install/lib -lcruise-posix -pthread
 
 INCLUDES=-I$(SYSIO_HOME)/include  \
 	-I$(SYSIO_HOME)/dev/stdfd \
@@ -28,7 +28,7 @@ INCLUDES=-I$(SYSIO_HOME)/include  \
 	-DHAVE_POSIX2008_SCANDIR=1 \
 	-I$(CRUISE_HOME)/src
 	
-FUSE_LIBS=-L$(FUSE_HOME)/install/lib -lfuse  -lglib-2.0 
+FUSE_LIBS=-L$(FUSE_HOME)/install/lib -lfuse3  -lglib-2.0 
 FUSE_INCLUDES=-I$(FUSE_HOME)/include \
         -D_FILE_OFFSET_BITS=64 \
         -DFUSE_USE_VERSION=26 \

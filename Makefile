@@ -18,7 +18,7 @@ SYSIO_FTPFS=$(SYSIO_HOME)/drivers/curlftpfs
 #CRUISE_INCLUDES=-I$(CRUISE_HOME)/src \
 #		-I$(CRUISE_HOME)
 
-FUSE_LIBS=-lglib-2.0  -L$(FUSE_HOME)/install/lib -lfuse -lgthread-2.0
+FUSE_LIBS=-lglib-2.0  -L$(FUSE_HOME)/install/lib -lfuse3 -lgthread-2.0
 FUSE_INCLUDES=-I$(FUSE_HOME)/include \
 	-D_FILE_OFFSET_BITS=64 \
 	-DFUSE_USE_VERSION=26 \

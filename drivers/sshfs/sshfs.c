@@ -3942,8 +3942,8 @@ int sshfs_minit(int argc, char *argv[])
 	if (sshfs.max_write > 65536)
 		sshfs.max_write = 65536;
 
-	if (fuse_is_lib_option("ac_attr_timeout="))
-		fuse_opt_insert_arg(&args, 1, "-oauto_cache,ac_attr_timeout=0");
+//	if (fuse_is_lib_option("ac_attr_timeout="))
+//		fuse_opt_insert_arg(&args, 1, "-oauto_cache,ac_attr_timeout=0");
 #if FUSE_VERSION >= 27
 	libver = fuse_version();
 	assert(libver >= 27);
