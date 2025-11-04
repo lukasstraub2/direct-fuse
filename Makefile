@@ -4,6 +4,7 @@ SYSIO_HOME=.
 FUSE_HOME=./libfuse
 CRUISE_HOME=../cruise#your cruise path
 GLFS_HOME=../xglfs#your xglfs path
+FIO_HOME=../fio
 
 SYSIO_SRC=$(SYSIO_HOME)/src
 SYSIO_DEV=$(SYSIO_HOME)/dev/stdfd
@@ -56,7 +57,7 @@ INCLUDES=-I$(SYSIO_HOME)/include  \
 
 CFLAGS=-fpic -g -O2 $(INCLUDES)
 
-all: libsysio.a libsysio.so
+all: libsysio.a libsysio.so fio_external_engine.so
 
 SYSIO_OBJS=	\
 	$(SYSIO_SRC)/access.o \
@@ -141,32 +142,38 @@ libsysio.a: $(OBJ)
 
 libsysio.so: $(OBJ) $(SYSIO_FUSE_OBJS) $(BBFS_OBJS) $(SSHFS_OBJS) $(CRUISE_OBJS) $(GLFS_OBJS)
 	$(CC) -shared $^ -o $@
+
+fio_external_engine.so: libsysio.a fio_external_engine.c
+	gcc -Wall -O2 -g -D_GNU_SOURCE -I$(FIO_HOME) -Iinclude -shared -rdynamic -fPIC -o $@ fio_external_engine.c libsysio.a -lglib-2.0
+
 clean:
-	rm $(SYSIO_SRC)/*.o
-	rm $(SYSIO_BBFS)/*.o
-	rm $(SYSIO_FUSE)/*.o
-	rm $(SYSIO_FTPFS)/*.o
-	rm $(SYSIO_SSHFS)/*.o
-	rm $(SYSIO_CRUISE)/*.o 
-	rm $(SYSIO_DEV)/*.o
-	rm libsysio.a
-#	rm libsysio.so
+	rm -f $(SYSIO_SRC)/*.o
+	rm -f $(SYSIO_BBFS)/*.o
+	rm -f $(SYSIO_FUSE)/*.o
+	rm -f $(SYSIO_FTPFS)/*.o
+	rm -f $(SYSIO_SSHFS)/*.o
+	rm -f $(SYSIO_CRUISE)/*.o 
+	rm -f $(SYSIO_DEV)/*.o
+	rm -f libsysio.a
+	rm -f libsysio.so
+	rm -f fio_external_engine.so
 
 cleanall:
-	rm $(SYSIO_SRC)/*.o
-	rm $(SYSIO_BBFS)/*.o
-	rm $(SYSIO_FUSE)/*.o
-	rm $(SYSIO_FTPFS)/*.o
-	rm $(SYSIO_SSHFS)/*.o
-	rm $(SYSIO_CRUISE)/*.o 
-	rm $(SYSIO_DEV)/*.o
-	rm libsysio.a
-	rm ./tests/bbfs_test/*.o
-	rm ./tests/sshfs_test/*.o
-	rm ./tests/ftpfs_test/*.o
-	rm ./tests/cruise_test/*.o
-	rm ./tests/glfs_test/*.o
-#	rm libsysio.so
+	rm -f $(SYSIO_SRC)/*.o
+	rm -f $(SYSIO_BBFS)/*.o
+	rm -f $(SYSIO_FUSE)/*.o
+	rm -f $(SYSIO_FTPFS)/*.o
+	rm -f $(SYSIO_SSHFS)/*.o
+	rm -f $(SYSIO_CRUISE)/*.o 
+	rm -f $(SYSIO_DEV)/*.o
+	rm -f libsysio.a
+	rm -f ./tests/bbfs_test/*.o
+	rm -f ./tests/sshfs_test/*.o
+	rm -f ./tests/ftpfs_test/*.o
+	rm -f ./tests/cruise_test/*.o
+	rm -f ./tests/glfs_test/*.o
+	rm -f libsysio.so
+	rm -f fio_external_engine.so
 
 
 
