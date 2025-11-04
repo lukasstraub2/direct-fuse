@@ -1,7 +1,7 @@
 CC=gcc
 #CFLAGS=-fpic -g -O2 
 SYSIO_HOME=.
-FUSE_HOME=/data/yzhu/fuse-2.9.7#replace to your FUSE_HOME (this path is for inv09)
+FUSE_HOME=./libfuse
 CRUISE_HOME=../cruise#your cruise path
 GLFS_HOME=../xglfs#your xglfs path
 
@@ -18,7 +18,7 @@ SYSIO_FTPFS=$(SYSIO_HOME)/drivers/curlftpfs
 #CRUISE_INCLUDES=-I$(CRUISE_HOME)/src \
 #		-I$(CRUISE_HOME)
 
-FUSE_LIBS=-lglib-2.0  -L$(FUSE_HOME)/install/lib -lfuse3 -lgthread-2.0
+FUSE_LIBS=-lglib-2.0  -L$(FUSE_HOME)/lib/.libs -lfuse -lgthread-2.0
 FUSE_INCLUDES=-I$(FUSE_HOME)/include \
 	-D_FILE_OFFSET_BITS=64 \
 	-DFUSE_USE_VERSION=26 \
@@ -126,10 +126,17 @@ FTPFS_OBJS = \
 
 OBJ = $(SYSIO_OBJS) $(SYSIO_FUSE_OBJS) $(BBFS_OBJS) $(SSHFS_OBJS) $(CRUISE_OBJS) $(FTPFS_OBJS) $(GLFS_OBJS)
 
-%.o: %.c
+libfuse/README.md:
+	git submodule update --init
+
+libfuse/lib/.libs/libfuse.so: libfuse/README.md
+	cd libfuse && ./configure
+	make -C libfuse/lib libfuse.la
+
+%.o: %.c libfuse/README.md
 	$(CC) $(CFLAGS) -c $< -o $@ $(LIBS)
 
-libsysio.a: $(OBJ) 
+libsysio.a: $(OBJ)
 	ar rcs $@ $^
 
 libsysio.so: $(OBJ) $(SYSIO_FUSE_OBJS) $(BBFS_OBJS) $(SSHFS_OBJS) $(CRUISE_OBJS) $(GLFS_OBJS)
