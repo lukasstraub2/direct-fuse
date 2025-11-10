@@ -142,7 +142,7 @@ libsysio.so: $(OBJ) $(SYSIO_FUSE_OBJS) $(BBFS_OBJS) $(SSHFS_OBJS) $(CRUISE_OBJS)
 	$(CC) -shared $^ -o $@
 
 fio_external_engine.so: libsysio.a fio_external_engine.c
-	gcc -Wall -O2 -g -D_GNU_SOURCE -I$(FIO_HOME) -Iinclude -shared -rdynamic -fPIC -o $@ fio_external_engine.c libsysio.a -lglib-2.0
+	gcc -Wall -O2 -g -D_GNU_SOURCE -I$(FIO_HOME) -Iinclude -shared -rdynamic -fPIC -o $@ fio_external_engine.c libsysio.a
 
 clean:
 	rm -f $(SYSIO_SRC)/*.o
