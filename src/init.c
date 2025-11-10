@@ -101,8 +101,8 @@
 
 #include "init_fuse.h"
 #include "fuse_bbfs.h"
-#include "fuse_sshfs.h"
-#include "fuse_ftpfs.h"
+//#include "fuse_sshfs.h"
+//#include "fuse_ftpfs.h"
 //#include "fuse_cruise.h"
 //#include "fuse_glfs.h"
 
@@ -1132,8 +1132,8 @@ _sysio_boot(const char *opt, const char *arg)
 int (*drvinits[])(void) = {
         _sysio_fuse_init,
 	_sysio_bbfs_init,
-        _sysio_sshfs_init,
-	_sysio_ftpfs_init,
+//        _sysio_sshfs_init,
+//	_sysio_ftpfs_init,
 //	_sysio_cruise_init,
 //	_sysio_glfs_init,
         NULL
