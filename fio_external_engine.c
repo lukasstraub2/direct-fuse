@@ -221,6 +221,7 @@ static int libsysio_open(struct thread_data *td, struct fio_file *f)
 		return 1;
 	}
 
+	f->engine_pos = 0;
 	return 0;
 }
 
