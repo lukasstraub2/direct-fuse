@@ -105,7 +105,7 @@ static enum fio_q_status libsysio_queue(struct thread_data *td,
 			ret = SYSIO_INTERFACE_NAME(pwrite)(file->fd, io_u->xfer_buf, io_u->xfer_buflen, io_u->offset);
 		}
 
-		if (ret >= 0) {
+		if (ret != (int) io_u->xfer_buflen && ret >= 0) {
 			io_u->resid = io_u->xfer_buflen - ret;
 			io_u->error = 0;
 		}
@@ -122,6 +122,7 @@ static enum fio_q_status libsysio_queue(struct thread_data *td,
 	}
 
 	if (ret < 0) {
+		errno = (errno? errno: -ret);
 		io_u->error = errno;
 		io_u_log_error(td, io_u);
 		td_verror(td, errno, "xfer");
