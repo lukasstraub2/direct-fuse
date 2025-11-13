@@ -53,7 +53,7 @@ INCLUDES=-I$(SYSIO_HOME)/include  \
         -DSTDFD_DEV=1 
 
 
-CFLAGS=-fpic -g -O2 $(INCLUDES)
+CFLAGS=-Wno-error=incompatible-pointer-types -Wno-error=implicit-function-declaration -Wno-error=return-mismatch -fpic -g -O2 $(INCLUDES)
 
 all: libsysio.a libsysio.so fio_external_engine.so
 
