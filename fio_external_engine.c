@@ -292,5 +292,5 @@ struct ioengine_ops ioengine = {
 	.unlink_file 	= libsysio_unlink,
 	.options		= options,
 	.option_struct_size	= sizeof(struct fio_libsysio_options),
-	.flags = FIO_SYNCIO | FIO_DISKLESSIO,
+	.flags = FIO_SYNCIO,
 };
